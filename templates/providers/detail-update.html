@@ -1,0 +1,45 @@
+{% extends "providers/base.html" %}
+
+{% block head_title %}{{ form.instance.title }} | Factory | {{ block.super}}{% endblock head_title %}
+<!-- Bootstrap core CSS signature create (detail update) -->
+{% block content %}
+
+            <section class="page">
+                <div class="container">
+                    <div class='row'>
+                        <div class='col-sm-6 col-sm-8 mx-auto text-left'>
+                            <p class='lead'>
+                            <h3>{{ form.instance.title }}</h3>
+                            <p>Suppliers: {{ form.instance.title }}</p>
+                            {% if form.instance.contents %}
+                                Contents
+                                <ul>
+                                    {% for item in form.instance.get_contents %}
+                                        <li>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {% if form.instance.excludes %}
+                                Excludes
+                                <ul>
+                                    {% for item in form.instance.get_excludes %}
+                                        <li>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            <hr/>
+                            <h3>Make changes</h3>
+                            {% if form.errors.non_field_errors %}
+                                {{ form.errors.non_field_errors }}
+                            {% endif %}
+                            {% include 'providers/snippets/demo_forms.html' %}
+                            </p>
+                            <a href='{% url "register" %}'>Join us</a>
+                            </p>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+{% endblock content %}

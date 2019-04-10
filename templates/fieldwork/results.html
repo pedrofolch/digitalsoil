@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+<h1>{{ fielddata.pile_name }}</h1>
+
+<ul>
+{% for action in fielddata.actions_set.all %}
+    <li>{{ action.action_on }} -- {{ action.actions_done }} turn pile{{ action.actions_done|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'fieldwork:detail' fielddata.id %}">Turn again?</a>
+</body>
+</html>

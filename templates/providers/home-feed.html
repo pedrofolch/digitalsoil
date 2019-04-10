@@ -1,0 +1,30 @@
+{% extends "providers/base.html" %}
+{% block content %}
+<!-- Bootstrap core CSS signature home-feed html -->
+<section class="page">
+    <div class='row'>
+        <div class='col-sm-8 text-center'>
+            <h4>User Following Feed</h4>
+
+
+            {% for obj in object_list %}
+            {{ obj.title }}
+
+            <div class='thumbnail'>
+                <h3><a href='{% url "accounts:detail" username=obj.user.username %}'>{{ obj.user.username }}</a></h3>
+                <h4>{{ obj.title }}</h4>
+                <a href='{% url "profiles:detail" username=obj.user.username %}?q={{ obj.username }}'>{{ obj.brandname.brand_name }}</a>| {{ obj.city }} | {{ obj.category }}|
+
+                <b>{{ obj.title }}:</b> with
+                {% for ing in obj.get_contents %}
+                <a href='{% url "profiles:detail" username=obj.user.username %}?q={{ ing }}'>{{ ing }}</a>
+                    <p>
+                    {{ obj.title }} {{ obj.city }} {{ obj.content }}
+                    </p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

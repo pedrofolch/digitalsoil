@@ -1,0 +1,25 @@
+{% extends 'engine_room/newblog_base.html' %}
+
+
+{% block head_extra %}
+    {% load markdown_deux_tags %}
+{{ form.media }}
+<p>{{ entry.body|markdown }}</p>
+
+{% endblock head_extra %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+
+        <div class='col-sm-6'>
+            <h1>Second Port Engine Form</h1>
+            <hr/>
+
+            <form method='POST' action='' enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type='submit' class='btn btn-default' value='Create Engine'>
+            </form>
+        </div>
+
+{% endblock content %}

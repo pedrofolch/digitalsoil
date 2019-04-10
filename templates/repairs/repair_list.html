@@ -1,0 +1,75 @@
+{% extends 'repairs/newblog_base.html' %}
+{% block content %}
+{% load static %}
+
+        <div class='col-sm-10 col-md-10 col-lg-12 text-left'>
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+                <a href="{% url 'repairs:create' %}"><h2>{{ title }} <small>Add</small></h2></a>
+
+                <button type="button"
+                    onclick="document.getElementById('demo').innerHTML = Date()">
+                    Click me to display Date and Time.</button>
+
+                    <p id="demo"></p>
+
+                <form method='GET' action='' class='row'>
+                    <div class='col-sm-10'>
+                        <div class='input-group'>
+                            <input class='form-control' type='text' name='q' placeholder='Search' value='{{ request.GET.q }}'/>
+                            <span class='input-group-btn'>
+                                <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+                                <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            <hr>
+                {% for obj in object_list %}
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="thumbnail">
+                        {% if obj.image %}
+                         <img src='{{ obj.image.url }}' class='img-responsive' />
+                        {% endif %}
+                      <div class="caption post-detail-item">
+                        {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+                        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+                        <p><small>INVOICE NO. {{ obj.invoice_number }}</small><br/><small>Last Repair: {{ obj.date }}</small></p>
+                        <p><small>Service Provider: {{ obj.service_provider }}</small><small>Odometer: {{ obj.odometer }}</small></p>
+                        {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+                        {{ obj.get_markdown|truncatechars_html:600 }}
+                        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">Comment</a></p>
+                      </div>
+                    <hr>
+                        <p><div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+                    </div>
+                  </div>
+
+                </div>
+                {% endfor %}
+{#                <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>#}
+
+            </div>
+
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if object_list.has_previous %}
+                        <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                    </span>
+
+                    {% if object_list.has_next %}
+                        <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    <hr/>
+
+{% endblock content %}

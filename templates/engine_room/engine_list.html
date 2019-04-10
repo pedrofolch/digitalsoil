@@ -1,0 +1,63 @@
+{% extends 'engine_room/newblog_base.html' %}
+{% block content %}
+{% load static %}
+
+        <div class='col-sm-10 col-md-10 col-lg-12 text-left'>
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+                <a href="{% url 'engine_room:create' %}"><h2>{{ title }} <small><small>Add</small></small></h2></a>
+
+                <button type="button"
+                    onclick="document.getElementById('demo').innerHTML = Date()">
+                    Click me to display Date and Time.</button>
+
+                    <p id="demo"></p>
+
+                <form method='GET' action='' class='row'>
+                    <div class='col-sm-10'>
+                        <div class='input-group'>
+                            <input class='form-control' type='text' name='q' placeholder='Engine Search' value='{{ request.GET.q }}'/>
+                            <span class='input-group-btn'>
+                                <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+                                <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
+            <hr>
+
+    <div class="container-fluid center-block">
+        <div class="col-6 align-center">
+            <div class="row center-block">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    {% for object in object_list %}
+                        <div class="container">
+                            <div class="col text-center">
+                                {% include 'engine_room/snippets/card.html' with instance=object %}<br/>
+                             </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if object_list.has_previous %}
+                        <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                    </span>
+
+                    {% if object_list.has_next %}
+                        <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    <hr/>
+{% endblock content %}

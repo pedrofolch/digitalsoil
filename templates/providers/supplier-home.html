@@ -1,0 +1,15 @@
+{% extends "providers/base.html" %}
+{% load static %}
+        </header>
+        <!-- Bootstrap core CSS signature-home html -->
+{% block content %}
+{% if messages %}
+              <div class="alert alert-primary" role="alert" messages text-center>
+                  {% for message in messages %}
+                      <b>{{ message }}</b><br/>
+                  {% endfor %}
+              </div>
+    {{user.username}} dashboard home landing page
+{% endif %}
+
+{% endblock content %}

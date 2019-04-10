@@ -1,0 +1,55 @@
+{% extends 'fieldwork/newblog_base.html' %}
+{% block content %}
+
+        <!-- Bootstrap core CSS pileofcompost list html -->
+<section class="page">
+
+    <div class="container-fluid text-left">
+        <div class='row align-items-start'>
+            <div class='col'>
+                {% for obj in object_list %}
+                    <div class="shadow p-3 mb-5 bg-light rounded">
+                    <h3>Field Work <small><a href='{% url "fieldwork:create" %}'>Add</a></small></h3>
+                    <ul>
+                    <li><a href='{{ obj.get_absolute_url }}'><h4>{{ obj.title }}</h4></a>
+
+                            {% if obj.image %}
+                                <img class="card-img-top" src="{{ obj.image.url }}" alt="Card image cap">
+                            {% endif %}
+                        <ul><b>Recipe Name:</b> {{ obj.brand_name }}<br/></ul>
+                        <ul><b>Pile Name: </b>{{ obj.pile_name }}<br/></ul>
+                        <ul><b>Observation:</b> {{ obj.observation }}<br/></ul>
+                        <ul><b>Date worked on:</b> {{ obj.timestamp }}<br/></ul>
+                        <ul><b>Pile specs:</b><br/></ul>
+                        <ul>Must Turn Now: {{ obj.must_turn_now }}<br/></ul>
+                        <ul>Must Water Now {{ obj.must_water_now }}<br></ul>
+                        <ul>Turn Cycle: {{ obj.turn_cycle }}</ul>
+                        {% if obj.contents %}
+                            Contents
+                            <ul>
+                                {% for item in obj.get_contents %}
+                                    <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% if obj.excludes %}
+                            Excludes
+                            <ul>
+                                {% for item in obj.get_excludes %}
+                                    <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    <li><a href='{% url "fieldwork:create" %}'>Add Field Work</a></li>
+                {% endfor %}
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+
+{% endblock content %}

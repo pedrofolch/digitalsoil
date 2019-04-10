@@ -1,0 +1,80 @@
+{% extends 'labsoil/new_base.html' %}
+{% block content %}
+{% load static %}
+
+      <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Your embedded video player code -->
+
+  <div class="fb-video" data-href="https://www.facebook.com/facebook/videos/10153231379946729/" data-width="500" data-show-text="false">
+    <div class="fb-xfbml-parse-ignore">
+      <blockquote cite="https://www.facebook.com/facebook/videos/10153231379946729/">
+        <a href="https://www.facebook.com/facebook/videos/10153231379946729/">How to Share With Just Friends</a>
+        <p>How to share with just friends.</p>
+        Posted by <a href="https://www.facebook.com/facebook/">Facebook</a> on Friday, December 5, 2014
+      </blockquote>
+    </div>
+  </div>
+<br/>
+        <div class='col-sm-12 col-md-10 col-lg-12 mx-auto text-left'>
+            <a href="{% url "recipes:create" %}"></a>
+            <a href="{% url 'labsoil:create' %}"><h1>Lab Work Analysis <small>Add</small></h1></a>
+            <form method='GET' action='' class='row'>
+                <div class='col-sm-10'>
+                    <div class='input-group'>
+                        <input class='form-control' type='text' name='q' placeholder='Search lab' value='{{ request.GET.q }}'/>
+                        <span class='input-group-btn'>
+                            <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+                            <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </form><br/>
+        </div>
+        <div class="container">
+            {% for obj in object_list %}
+            <div class="row">
+              <div class="col-sm-12 mr-auto">
+                <div class="thumbnail">
+                    {% if obj.image %}
+                     <img src='{{ obj.image.url }}' class='img-responsive' alt="image"/>
+{#                        <iframe width="300" height="180" src="{% static 'images/soilfoodweb/clips/microbes.mp4' %}" class="image-responsive" frameborder="0" allowfullscreen></iframe>#}
+                    {% endif %}
+                  <div class="caption lab-detail-item">
+                    {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+                    <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+                    {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+                    {{ obj.get_markdown|truncatechars_html:600 }}
+                  </div>
+                </div>
+              </div>
+            <hr/>
+            </div>
+            {% endfor %}
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if object_list.has_previous %}
+                        <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                    </span>
+
+                    {% if object_list.has_next %}
+                        <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'products/base.html' %}
+{% block content %}
+{% load static %}
+
+<br/>
+
+    {{ message }}
+
+    <div class="container">
+        <form method='GET' action='' class='row'>
+            <div class='col-sm-10'>
+                <div class='input-group'>
+                    <input class='form-control' type='text' name='q' placeholder='Search product' value='{{ request.GET.q }}'/>
+                    <span class='input-group-btn'>
+                        <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br/>
+
+    <div class="container-fluid center-block">
+        <div class="row center-block">
+        
+            <div class="col-12 align-center">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+
+                    {% for object in object_list %}
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    {% include 'products/snippets/card.html' with instance=object %}<br/>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+

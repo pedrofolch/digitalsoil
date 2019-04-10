@@ -1,0 +1,66 @@
+{% extends 'providers/base.html' %}
+{% block content %}
+
+    <!-- Bootstrap core CSS signature list-of-signatures -->
+<section class="page">
+    <div class="col-sm-10 col-md-10 col-lg-10 text-left" style="">
+        <h2>{{ title }}</h2>
+        <form method="get" action="">
+            <input type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}">
+            <input type="submit" value="Search">
+        </form>
+        {% for obj in object_list %}
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="thumbnail">
+                        <h3>{{ obj.name }} <br/></h3>
+                        {% if obj.image %}
+                            <img src="{{ obj.image.url }}" class="img-responsive" width="600" height="400">
+                        {% endif %}
+                        <div class="caption">
+                            {% if obj.draft %}
+                                <h3>Draft</h3>
+                                {% if obj.publish > today %}<h3>Future recipe</h3>
+                                {% endif %}
+                            {% endif %}
+
+                            Created: <small>{{ obj.pub_date }}</small>
+                            <p>last worked on: {{ obj.update }}<br/>
+{#                            {% if obj.user.get_full_name %}#}
+                                Nutrient: {{ obj.user.get_full_name }}</p>
+                                <p> Signature Brand is {{ obj.category }}. Is the recipe public? {{ obj.public }}</p>
+                                <p>{{ obj.county }}, {{ obj.state }}</p>
+{#                            {% endif %}#}
+                            <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
+{#                            <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>#}
+                        <hr/></div>
+                    </div>
+                </div>
+                <hr/>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                    <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}
+                    {% if request.GET.q %}
+                        &q={{ request.GET.q }}
+                    {% endif %}">
+                    previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+
+                {% if object_list.has_next %}
+                    <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}
+                        &q={{ request.GET.q }}
+                    {% endif %}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

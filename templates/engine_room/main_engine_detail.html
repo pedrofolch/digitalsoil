@@ -1,0 +1,58 @@
+{% extends 'engine_room/newblog_base.html' %}
+{% load urlify %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+ {% block engine_detail_link %}
+     <li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>
+ {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class='row'>
+        <div class="col-sm-11">
+            {% if instance.image %}
+                <img src='{{ instance.image.url }}' class='img-responsive' width="450" alt="engine image"/>
+            {% endif %}
+            <h1>{{ instance.title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}<br/>{{ instance.publish }}</small></h1>
+            <p>
+                Engine Location: <b>{{ instance.engine_on }}</b><br/>
+                Odometer: <b>{{ instance.odometer }}</b><br/>
+                Needs Repair: <b>{{ instance.need_repairs }}</b><br/>
+            </p>
+
+        {% if instance.user.get_full_name %}
+            <p>Author: {{ instance.user.get_full_name }}</p>
+        {% endif %}
+
+        </div>
+
+        <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+
+        </div><br/>
+
+
+    <div class='row'>
+        <div class='col-sm-12 '>
+            <div class='post-detail-item'>{{ instance.get_markdown }}</div>
+
+            <br/>
+        </div>
+        <p><a href="{% url 'repairs:create' %}" class="btn btn-primary" role="button">Repair Order</a>
+            <a href="{% url 'repairs:list' %}" class="btn btn-primary" role="button">View Orders</a>
+            <a href="{% url 'engine_room:update' slug=instance.slug %}" class="btn btn-primary" role="button">engine update</a></p>
+
+        <hr/>
+
+
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "registration/mag-login.html" %}
+
+
+{% block content %}
+
+        <h1>Login</h1>
+        {% if form.errors %}
+            <p>Your username and password didn't match.<br/> Please try again.</p>
+            <li><a href="{% url "forgot" %}">Forgot Password</a></li>
+
+        {% endif %}
+
+        {% if next != "/register/" and next is not None %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="login"/>
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+
+            <p>Need to <a href='{% url "register" %}'>register</a>?</p>
+
+{# Assumes you setup the passwodigrd_reset view in your URLconf #}
+
+{% endblock content %}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<title>{% block head_title %}cart{% endblock head_title %}</title>
+<!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+<link rel='stylesheet' href='{% static "css/base.css" %}' />
+<style>
+{% block style %}{% endblock style %}
+</style>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{% include "products/messages_display.html" %}
+
+
+<div class='container'>
+    <ol class='breadcrumb'>
+        <li><a href="{% url 'assets:list' %}">Garage</a></li>
+        <li><a href="{% url 'repairs:list' %}">Repairs & Invoices</a></li>
+        <li><a href='{% url "posts:list" %}'>Blog/Posts</a></li>
+        <li><a href="{% url 'fuel_station:list' %}">Fuel Station</a></li>
+        <li><a href="{% url 'providers:list-of-supplier' %}">Service Providers</a></li>
+        <li><a href="{% url 'products:product_list' %}">Merchandise & Consumables</a></li>
+        <li><a href="{% url 'iotsensor:list' %}">Internet of Thing Sensor</a></li>
+
+        {% block post_detail_link %}
+        {% endblock %}
+
+        {% if not request.user.is_authenticated %}
+        <li class='pull-right'><a href='{% url "register" %}'>Register</a></li>
+        <li class='pull-right'><a href='{% url "login" %}'>Login</a></li>
+        {% else %}
+        <li class='pull-right'><a href='{% url "logout" %}'>Logout</a></li>
+        {% endif %}
+    </ol>
+    <div class='container'>
+        {% block content %}{% endblock content %}
+    </div>
+</div>
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,20 @@
+{#<div class="shadow p-3 mb-5 bg-white rounded">#}
+
+    <div class="card" style="width: 18rem; ">
+        {% if instance.image %}
+            <img class="card-img-top" src="{{ instance.image.url }}" alt="Card image cap">
+
+            <div class="card-body">
+
+            <h5 class="card-title">{{ instance.title }}</h5>
+            <p class="card-text">{{ instance.content }}</p>
+            <p>{{ instance.title }}</p>
+            <p>{{ instance.content }}</p>
+
+            <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">asset view</a>
+            <a href="{% url 'assets:update' slug=instance.slug %}" class="btn btn-warning" role="button">Asset Update</a>
+
+        {% endif %}
+        </div>
+    </div>
+{#</div>#}

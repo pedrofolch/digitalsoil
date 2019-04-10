@@ -1,0 +1,69 @@
+{% load static %}
+<footer class="container text-center">
+    <p><small>&copy; folch<sup>2</sup>iot 2017-2018</small></p>
+</footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+{#    <script src="{% static 'js/scripts/main.js' %}"></script>#}
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(".content-markdown").each(function(){
+                let content = $(this).text();
+                let markedContent = marked(content);
+                $(this).html(markedContent)
+        });
+        $(".post-detail-item img").each(function(){
+                $(this).addClass("img-responsive");
+        });
+
+
+        let contentInput = $("#id_content");
+
+        function setContent(value){
+            let markedContent = marked(value);
+            $("#preview-content").html(markedContent);
+            $("#preview-content img").each(function(){
+                $(this).addClass("img-responsive")
+            })
+        }
+        setContent(contentInput.val());
+
+        contentInput.keyup(function(){
+            let newContent = $(this).val();
+            setContent(newContent)
+        });
+
+        let titleInput = $("#id_title");
+
+
+        function setTitle(value) {
+            $("#preview-title").text(value)
+        }
+        setTitle(titleInput.val());
+
+        titleInput.keyup(function(){
+            let newContent = $(this).val();
+            setTitle(newContent)
+        });
+
+        $(".comment-reply-btn").click(function(event){
+            event.preventDefault();
+            $(this).parent().next(".comment-reply").fadeToggle();
+        })
+
+
+        // preview-title
+        // preview-content
+
+    })
+
+    </script>
+    </body>
+</html>

@@ -1,0 +1,268 @@
+{% extends 'labsoil/new_base.html' %}
+{% load static %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+ {% block labsoil_detail_link %}
+     <li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>
+ {% endblock %}
+
+{% block content %}
+
+<section class="page">
+    <div class="container">
+        <div class="row">
+            <div class="shadow p-3 mb-5 bg-white rounded border">
+                <ul>
+                    <h2>{{ instance.title }} form</h2>
+                    <p>Name: {{ instance.pile_name }}</p><hr>
+                    {% if instance.contents %}
+                        Content
+                        <ul>
+                            {% for item in instance.get_contents %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+
+                        </ul>
+                        {% endif %}
+
+                        {% if instance.excludes %}
+                        Excludes
+                        <ul>
+                            {% for item in instance.get_excludes %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        <hr/>
+                        <h2>Make changes</h2>
+                        </ul>
+                        {% endif %}
+
+
+                        <h1>Lab Data</h1>
+                        <p> Collected by: <b>{{ instance.collected_by }}</b><br/>Date of Collection: <b>{{ instance.date_collected }}</b></p>
+                        <p>Date Observed: {{ instance.date_observed }}<br/>Sample ID: {{ instance.sample_id }}<br />
+                            Coverlip Size:  {{ instance.coverlip_size }}<br />Number or drops per 1 ml of water: {{ instance.drops_per_ml }}</p>
+                            <hr/>
+
+                    <div class="col-7">
+                        {% if instance.image %}
+{#                            <img src='{{ instance.image.url }}' class='img-responsive' alt="image"/>#}
+{#                            <iframe width="300" height="200" src="{% static 'images/soilfoodweb/clips/microbes.mp4' %}" class="image-responsive" frameborder="4" allowfullscreen></iframe>#}
+                        {% endif %}
+                    </div><br />
+
+                    <video controls
+                           controlsList="nodownload"
+                           poster="{{ instance.image.url }}"
+                           src="/static{{ instance.video_url }}"
+                           width="400" height="300">
+                        Sorry, your browser doesn't support embedded videos.
+                    </video>
+
+                    <div class="col-11"><h2>Beneficial Organisms</h2><br/>
+
+                        <div class="col-11 alert-warning shadow">
+
+                            <h4>Bacteria (mg/g)</h4><b><p>Result: {{ instance.bacteria_total_mg_per_g }}</p></b>
+                            {% if instance.comments_bacteria %}
+                                Comments:  {{ instance.comments_bacteria }}
+                            {% endif %}
+                            <p>Expected Range: {{ instance.bacteria_expected_range }}<br/>
+                                Mean:  {{ instance.bacteria_mean }}<br/>
+                                Standar Diviation:  {{ instance.bacteria_st_diviation }}<br />
+                                Dilution:  {{ instance.bacteria_dilution }}
+                            </p>
+                        </div>
+
+                        <div class="col-11 alert-warning shadow">
+                            <h4>Fungi(mg/g)</h4><br />
+                            <b>Result: {{ instance.fungi_total_mg_per_g }}</b>
+                            <p>Expected Range: {{ instance.fungi_expected_range }}<br/>
+                                Mean:  {{ instance.fungi_mean }}<br/>
+                                Standard Diviation: {{ instance.fungi_st_diviation}}</p>
+                            {% if instance.fungi_diameter_mean %}
+                                fungi diameter mean: {{ instance.fungi_diameter_mean }}<br />Dilution: {{ instance.fungi_dilution }}
+                            {% elif instance.comments_fungi %}
+                                Comments:  {{ instance.comments_fungi }}
+                            {% endif %}
+                        </div><br />
+
+                        <div class="col-11 alert-warning shadow">
+                            <h4>Av. Hyphal Diameter(mg)</h4>
+                            <p><b>Result: {{ instance.fungi_diameter_mean }}</b></p>
+                            <p>Expected Range: {{ instance.de_av_hyphal_dia_expected_range }}<br/>
+                                Mean:  {{ instance.fungi_diameter_mean }}<br/></p>
+                        </div>
+
+                        <div class="col-11 alert-danger shadow">
+                            <h4>Actinobacteria (mg/g)</h4><b><p>Result: {{ instance.actinobacteria_total_mg_per_g }}</p></b>
+                            <p>Expected Range: {{ instance.actinobacteria_expected_range }}<br/>
+                                Mean:  {{ instance.actinobacteria_mean }}<br/>
+                                Standard Diviation: {{ instance.actinobacteria_st_diviation }}<br />
+                                Dilution: {{ instance.actinobacteria_dilution }}
+                            </p>
+                            {% if instance.comments_actinobacteria %}
+                                Comments:  {{ instance.comments_actinobacteria }}
+                            {% endif %}
+                        </div>
+                        <div class="col-11 alert-danger shadow">
+                            <h4>Oomycetes (mg/g)</h4><b><p>Result: {{ instance.oomycetes_total_mg_per_g }}</p></b>
+                            <p>Expected Range: {{ instance.oomycetes_expected_range }}<br/>
+                                Mean:  {{ instance.oomycetes_mean }}<br/>
+                                Standard Diviation: {{ instance.oomycetes_st_diviation }}<br />
+                                Dilution: {{ instance.oomycetes_dilution }}<br />
+                                Number or drops per 1 ml of water: {{ instance.drops_per_ml }}</p>
+                            {% if instance.comments_oomycetes %}
+                                Comments:  {{ instance.comments_oomycetes }}
+                            {% endif %}
+                        </div>
+                        <div class="col-11 alert-warning shadow">
+                            <h4>Flagellates (mg/g)</h4><b><p>Result: {{ instance.flagellates_total_mg_per_g }}</p></b>
+                            <p>Expected Range: {{ instance.flagellates_expected_range }}<br/>
+                                Mean:  {{ instance.flagellates_mean }}<br/>
+                                Standard Diviation: {{ instance.flagellates_st_diviation }}<br />
+                                Dilution: {{ instance.flagellates_dilution }}
+                            </p>
+                            {% if instance.comments_flagellates %}
+                                Comments:  {{ instance.comments_flagellates }}
+                            {% endif %}
+                        </div>
+
+                        <div class="col-11 alert-warning shadow">
+                            <h4>Amoeba (mg/g)</h4><b><p>Result: {{ instance.amoeba_total_mg_per_g }}</p></b>
+                            <p>Expected Range: {{ instance.amoeba_expected_range }}<br/>Mean:  {{ instance.amoeba_mean }}<br/>
+                                Standard Diviation: {{ instance.amoeba_st_diviation }}<br />
+                                Dilution: {{ instance.amoeba_dilution }}
+                            </p>
+                            {% if instance.comments_amoeba %}
+                                Comments:  {{ instance.comments_amoeba }}
+                            {% endif %}
+                        </div>
+
+                        <div class="col-11 alert-danger shadow">
+                            <h4>Ciliates (#s/g)</h4><b><p>Result: {{ instance.ciliates_total_mg_per_g }}</p></b>
+                            <p>Expected Range: {{ instance.ciliates_expected_range }}<br/>Mean:  {{ instance.ciliates_mean }}<br/>
+                                Standard Diviation: {{ instance.ciliates_st_diviation }}<br />
+                                Dilution: {{ instance.ciliates_dilution }}
+                            </p>
+                            {% if instance.comments_ciliates %}
+                                Comments:  {{ instance.comments_ciliates }}
+                            {% endif %}
+                        </div><hr/>
+
+                        <div class="col-11 alert-danger shadow">
+                            <h4>Nematodes (numbers/g)</h4><b><p>Result: {{ instance.nematodes_total_num_p_gram }}</p></b>
+                            <p>Expected Range: {{ instance.no_expected_range }}<br />Mean:  {{ instance.ciliates_mean }}<br />
+                                Dilution: {{ instance.nematodes_dilution }}
+                            </p><br/>
+                            {% if instance.comments_ciliates %}
+                                Comments:  {{ instance.comments_ciliates }}
+                            {% endif %}
+                        </div>
+                        <hr/>
+                        <div class="col-11 alert-warning shadow">
+                            <h4>Nematode ID and Numbers Observed</h4><br/>
+                            <p>Bacterial Feeders: {{ instance.nematodes_bacterial_feeders }}<br/>
+                                Fungal Feeders: {{ instance.nematodes_fungal_feeders }}<br/>
+                                Predatory:  {{ instance.nematodes_predatory }}<br/>
+
+                            <div class="col alert-danger">Switchers: {{ instance.nematodes_switchers }}<br/>
+                            Root Feeders: {{ instance.nematodes_root_feeders }}</div>
+                            <br/>Omnivores: {{ instance.nematodes_omnivores }}<br />
+                            <hr/>Total Nematodes Observed: {{ instance.total_nematodes }}<br />Total Beneficials
+                            {{ instance.total_beneficial }}<br />Total Detrimentals {{ instance.total_detrimentals }}<br /><hr />
+                            {% if instance.comments_general %}
+                                Comments:  {{ instance.comments_general }}<br />
+                            {% endif %}
+                            {% if instance.other_notes %}
+                                Other Notes: {{ instance.other_notes }}
+                            {% endif %}
+
+                            total(number/gram):  {{ instance.nematodes_total_num_p_gram }}<br />
+                            Dilution: {{ instance.nematodes_dilution }}
+
+                        </div>
+                    </div>
+                    <hr />
+                    <a href="{% url 'labsoil:create' %}"><h5><small><small>Add</small></small> Lab Review </h5></a>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{#    <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>#}
+{#    <hr/>#}
+{##}
+{##}
+{#    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_url }}">Facebook </a>#}
+{#    <a href="https://twitter.com/home?status={{ instance.content|truncatechars:80|urlify }}%20{{ request.build_absolute_url }}"> Twitter </a>#}
+{#    <a href='https://plus.google.com/share?url={{ request.build_absolute_url }}'>Google+ </a>#}
+{#    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_url }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_url }}"> Linkedin </a>#}
+{#    <a href="http://www.reddit.com/submit?url={{ request.build_absolute_url }}&title={{ share_string }}.">Reddit</a>#}
+{##}
+{##}
+{#</div>#}
+{#       <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>#}
+{##}
+{##}
+{#<div class='row'>#}
+{#    <div class='col-sm-12 '>#}
+{##}
+{#       <div class='post-detail-item'>{{ instance.get_markdown }}</div>#}
+{##}
+{#        <hr/>#}
+{#        <br/>#}
+{##}
+{#        <div>#}
+{##}
+{#            <p class='lead'>Comments</p>#}
+{#            {% if request.user.is_authenticated %}#}
+{#            <form method="POST" action="."> {% csrf_token %}#}
+{#                {{ comment_form|crispy }}#}
+{#                <input type='submit' value='Post comment' class='btn btn-default'>#}
+{#            </form>#}
+{#            {% else %}#}
+{#            <p>You must login to comment </p>#}
+{#            {% endif %}#}
+{#            <hr/>#}
+{#            {% for comment in comments %}#}
+{##}
+{#            <blockquote>#}
+{##}
+{#              <p>{{ comment.content }}</p>#}
+{#              <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class='comment-reply-btn' href='#'>Reply</a> | <a class='' href='{{ comment.get_absolute_url }}'>Thread</a></footer>#}
+{#              <div class='comment-reply'>#}
+{#                  {% for child_comment in comment.children %}#}
+{#                    <blockquote>#}
+{#                    <p>{{ child_comment.content }}</p>#}
+{#                    <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>#}
+{#                    </blockquote>#}
+{#                 {% endfor %}#}
+{#                 {% if request.user.is_authenticated %}#}
+{#                <form method="POST" action="../../engine_room">#}
+{#                    {% csrf_token %}#}
+{#                    {{ comment_form|crispy }}#}
+{#                    <input type='hidden' name='parent_id' value='{{ comment.id }}'/>#}
+{#                    <input type='submit' value='Reply' class='btn btn-default'/>#}
+{#                </form>#}
+{#                 {% else %}#}
+{#                     <p>You must login to comment </p>#}
+{#                 {% endif %}#}
+{#              </div>#}
+{##}
+{#            </blockquote>#}
+{##}
+{#            <hr/>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{##}
+{#    </div>#}
+
+{% endblock content %}

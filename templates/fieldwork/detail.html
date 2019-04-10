@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Field Work</title>
+</head>
+<body>
+<h1>{{ fielddata.pile_name }}</h1>
+    <ul>
+        {% for action in instance.action_set.all %}
+            <li><a href="{% url 'detail' fielddata.id %}">{{ fielddata.pile_name }}</a></li>
+        {% endfor %}
+    </ul>
+    This should be blanks too: {{ fieldwork }}
+
+<h3>{{ fielddata.pile_name }}</h3>
+
+{% if error_message %}
+    <p>
+        <strong>{{ error_message }}</strong>
+    </p>
+{% endif %}
+
+<form action="{% url 'fieldwork:action' fielddata.id %}" method="post">
+{% csrf_token %}
+{% for action in instance.actions_set.all %}
+    <input type="radio" name="turned" id="turned_cycle{{ forloop.counter }}" value="{{ actions.id }}" />
+    <label for="action{{ forloop.counter }}">{{ actions.action_on }}</label><br />
+    <input type="radio" name="watered" id="times_watered{{ forloop.counter }}" value="{{ actions.id }}" />
+    <label for="action{{ forloop.counter }}">{{ actions.actions_on }}</label><br />
+{% endfor %}
+    <input type="submit" value="action" />
+</form>
+
+
+</body>
+</html>

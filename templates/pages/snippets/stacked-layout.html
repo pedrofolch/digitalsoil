@@ -1,0 +1,40 @@
+{% load static %}
+
+      <div class="container marketing center-text">
+        <!-- Three columns of text below the carousel -->
+          <div class="row">
+                  {% if form.errors.non_field_errors %}
+                      {{ form.errors.non_field_errors }}
+                  {% endif %}
+          </div><br/>
+
+          <div class="row">
+              <div class='col-xs-10 col-sm-10 col-md-10 col-lg-8 mx-auto text-left' style="padding-bottom: 0px;">
+                  <div class="shadow p-3 mb-5 bg-white rounded">
+                      <h5>Newsletter Sign Up</h5>
+                      {% include 'pages/snippets/join-form.html' with form=form %}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+   <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">{{ page_obj.title }}</h1>
+          <p>{{ page_obj.title_description|linebreaks }}</p>
+            {% if title_btn_url %}
+          <p><a class="btn btn-primary btn-lg" href="{{ title_btn_url }}" role="button">{{ title_btn }}</a></p>
+            {% endif %}
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+          {{ page_obj.content|safe }}
+
+      </div> <!-- /container -->
+
+    </main>

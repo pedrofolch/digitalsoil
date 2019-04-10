@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="folch2iot is a HTML5 & CSS3 magazine dedicated to internet of things and field work.">
+		<meta name="author" content="Pedro Folch">
+		<meta name="keyword" content="folch2iot, html5, css3, template, magazine template">
+
+		<title><small>&copy; folch<sup>2</sup>iot 2017-2018</small></title>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="{% static "scripts/bootstrap/bootstrap.min.css" %}" />
+		<!-- IonIcons -->
+		<link rel="stylesheet" href="{% static "scripts/ionicons/css/ionicons.min.css" %}" />
+		<!-- Toast -->
+		<link rel="stylesheet" href="{% static "scripts/toast/jquery.toast.min.css" %}" />
+		<!-- OwlCarousel -->
+		<link rel="stylesheet" href="{% static "scripts/owlcarousel/dist/assets/owl.carousel.min.css" %}" />
+		<link rel="stylesheet" href="{% static "scripts/owlcarousel/dist/assets/owl.theme.default.min.css" %}" />
+		<!-- Magnific Popup -->
+		<link rel="stylesheet" href="{% static "scripts/magnific-popup/dist/magnific-popup.css" %}" />
+		<link rel="stylesheet" href="{% static "scripts/sweetalert/dist/sweetalert.css" %}" />
+		<!-- Custom style -->
+		<link rel="stylesheet" href="{% static "css/style.css" %}" />
+		<link rel="stylesheet" href="{% static "css/skins/all.css" %}" />
+		<link rel="stylesheet" href="{% static "css/demo.css" %}" />
+	</head>
+
+	<body class="skin-orange">
+		<header class="primary">
+			<div class="firstbar">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 mx-auto">
+							<div class="brand">
+								<a href="{% url "folch2iot" %}">
+									<img src="{% static "images/iot/logo/folchiot.gif" %}" alt="folch2iot Logo" />
+								</a>
+							</div>
+                        </div>
+						<div class="col-md-6 col-sm-6 mx-auto">
+                            <a href="{% url "compost" %}">
+                            <img src="{% static 'images/soilfoodweb/logo/bannerSFWA.jpg' %}" alt="sfwa Logo" width="300" height=""></a>
+						</div>
+						<div class="col-md-12 text-right">
+							<ul class="nav-icons">
+								<a href="{% url "register" %}"><i class="ion-person-add"></i> Register  </a>
+                                    <a href="{% url "login" %}"><i class="ion-person"></i> Login</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Start nav -->
+
+			<!-- End nav -->
+		</header>
+
+		<section class="login first grey">
+			<div class="container">
+				<div class="box-wrapper">
+					<div class="box box-border">
+						<div class="box-body">
+                            <div class="constainer">
+							    {% block content %}
+
+                                {% endblock content %}
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+            </div>
+		</section>
+
+		<!-- Start footer -->
+
+		<!-- End Footer -->
+
+		<!-- JS -->
+		<script src="{% static "js/jquery.js" %}"></script>
+		<script src="{% static "js/jquery.migrate.js" %}"></script>
+		<script src="{% static "scripts/bootstrap/bootstrap.min.js" %}"></script>
+		<script>var $target_end=$(".best-of-the-week");</script>
+		<script src="{% static "scripts/jquery-number/jquery.number.min.js" %}"></script>
+		<script src="{% static "scripts/owlcarousel/dist/owl.carousel.min.js" %}"></script>
+		<script src="{% static "scripts/magnific-popup/dist/jquery.magnific-popup.min.js" %}"></script>
+		<script src="{% static "scripts/easescroll/jquery.easeScroll.js" %}"></script>
+		<script src="{% static "scripts/sweetalert/dist/sweetalert.min.js" %}"></script>
+		<script src="{% static "scripts/toast/jquery.toast.min.js" %}"></script>
+		<script src="{% static "js/demo.js" %}"></script>
+		<script src="{% static "js/e-magz.js" %}"></script>
+	</body>
+</html>

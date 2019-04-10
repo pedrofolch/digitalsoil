@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Nearby Shops</title>
+</head>
+
+<body>
+
+    <h1>Nearby Shops</h1>
+    {% if shops %}
+    <ul>
+        {% for shop in shops %}
+        <li>
+            {{ shop.name }} : {{shop.distance}}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+<script>
+    var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+</html>
+
+

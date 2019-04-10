@@ -1,0 +1,71 @@
+{% extends 'folch2iot.html' %}
+{% block head_title %}{{ user.username }} | {{ block.super}}{% endblock head_title %}
+
+{% block content %}
+  <div class='row'>
+      <div class='col-sm-6 text-center'>
+          <h2>{{ user.username }}</h2>
+            {% if request.user.is_authenticated %}
+            <p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %}</p>
+            {% else %}
+            <p><i>Login to follow</i></p>
+            {% endif %}
+            <form class='form' method='GET' action='.'>
+                <input type='text' placeholder="Search.." name='q' value='{{ request.GET.q }}'>
+                <button class='btn btn-default' type='submit'>Search</button>
+            </form>
+      </div>
+      <hr/>
+      <div class="container-fluid">
+          <div class='row'>
+              <div class='col-sm-12'>
+                  <div class='thumbnail'>
+                      {% if locations %}
+                          {% for brandname in locations %}
+                              <h3>{{ brandname.title }}</h3>
+                              {{ brandname.county }}, {{brandname.city }}, {{ brandname.state }} |
+                              <b>{{ brandname.category }}</b>
+                              {% for pileofcompost in brandname.pileofcompost_set.all %}
+                                  <div style='margin-bottom: 15px;'>
+                                      <li><b>{{ pileofcompost.pile_name }}</b></li><br/>
+                                      <p>
+                                          {{ pileofcompost.recipe_name }}
+                                          {{ pileofcompost.observation }}
+                                          {{ pileofcompost.pub_date }}
+                                          {{ pileofcompost.update }}
+                                          {{ pileofcompost.ready_to_use }}
+                                          {{ pileofcompost.contains }}
+                                          {{ pileofcompost.public }}
+                                          {{ pileofcompost.category }}
+                                          {{ pileofcompost.category_value }}
+                                          {{ pileofcompost.nitrogen_material }}
+                                          {{ pileofcompost.amount_nitrogen }}
+                                          {{ pileofcompost.nitrogen_material_two }}
+                                          {{ pileofcompost.type_of_bucket_nitrogen_two }}
+                                          {{ pileofcompost.high_nitrogen_material }}
+                                          {{ pileofcompost.amount_high_nitrogen }}
+                                          {{ pileofcompost.wide }}
+                                          {{ pileofcompost.length }}
+                                          {{ pileofcompost.tall }}
+                                        </p>
+                                      {% for core in pileofcompost.fieldworkcore_set.all %}
+                                          <li>{{ core.core_temperature }}</li>
+                                          <li>{{ core.core_humidity }}</li>
+                                      {% endfor %}
+                                      {% for action in pileofcompost.fieldworkaction_set.all %}
+                                          <li>{{ action.watered }}</li>
+                                          <li>{{ action.turned }}</li>
+                                          <li>{{ action.turn_cycle }}</li>
+                                      {% endfor %}
+                                  </div>
+                              {% endfor %}
+                          {% endfor %}
+                      {% else %}
+                          <p class='lead'>No Items Found</p>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% endblock %}

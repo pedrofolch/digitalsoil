@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% include 'fieldwork/reactify/css.html' %}
+    <title>Reactify Django</title>
+  </head>
+  <body>
+    <div class='container-fluid'>
+        {% include 'fieldwork/reactify/navbar.html' %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+    </div>
+
+
+    {% include 'fieldwork/reactify/js.html' %}
+  </body>
+</html>

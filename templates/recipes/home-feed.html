@@ -1,0 +1,28 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<!-- Bootstrap core CSS pileofcompost home html -->
+        <div class='row'>
+            <div class='col-sm-8 text-center'>
+                <div class="shadow p-3 mb-5 bg-white rounded">
+
+                    <h4>User Following Feed</h4>
+
+                    {% for obj in object_list %}
+                        {{ obj.title }}
+
+                    <div class='thumbnail'>
+                        <h3><a href='{% url "profiles:detail" username=obj.user.username %}'>{{ obj.user.username }}</a></h3>
+                        <h4>{{ obj.title }}</h4>
+                        <p><a href='{% url "profiles:detail" username=obj.user.username %}?q={{ obj.username }}'>{{ obj.brandname.brand_name }}</a>| {{ obj.city }} | {{ obj.category }}|
+                            <b>{{ obj.title }}:</b> with
+                            {% for ing in obj.get_contents %}
+                            <a href='{% url "profiles:detail" username=obj.user.username %}?q={{ ing }}'>{{ ing }}</a>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}

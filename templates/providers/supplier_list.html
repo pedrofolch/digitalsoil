@@ -1,0 +1,37 @@
+{% extends "providers/base.html" %}
+<!-- Bootstrap core CSS signature-list -->
+
+{% block content %}
+
+    <section class="page">
+        <div class="container">
+            <div class='row'>
+                <div class='col-sm-1 col-md-1 mr-auto'>
+                    <h4>Suppliers<small><a href='{% url "providers:create" %}'>  Add</a></small></h4>
+                    <h4>Service Provider<small><small><a href='{% url "providers:supplier_list" %}'>  List</a></small></small></h4>
+                    <ul>
+                        {% for obj in object_list %}
+                            <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br/>
+        {#                        <small><strong>Address: </strong>{{ obj.location }}#}
+        {#                            <br/><strong>Category: </strong>{{ obj.category }}<br/><strong>Created on:  </strong>{{ obj.pub_date }}<br/>#}
+        {#                            <strong>updated: </strong>{{ obj.update }}</small></li>#}
+        {#                    <strong>worked by: </strong>{{ obj.user }}#}
+                            <hr>
+
+{#                        {% for core in pileofcompost.fieldworkcore_set.all %}#}
+{#                                <li>{{ core.core_temperature }}</li>#}
+{#                                <li>{{ core.core_humidity }}</li>#}
+{#                        {% endfor %}#}
+{#                        {% for action in pileofcompost.fieldworkaction_set.all %}#}
+{#                            <li>{{ action.watered }}</li>#}
+{#                            <li>{{ action.turned }}</li>#}
+{#                            <li>{{ action.turn_cycle }}</li>#}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+

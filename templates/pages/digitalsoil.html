@@ -1,0 +1,60 @@
+{% extends 'folch2iot.html' %}
+
+<style>
+    {% block styles %}
+        {% if page_obj.nav_color != '#000000' %}
+        .navbar-inverse { background-color: {{ page_obj.nav_color }} border-color:{{ page_obj.nav_color }}}
+        {% endif %}
+        {% if not page_obj.show_nav %}
+            body { padding-top: 0; padding-bottom: 0; }
+        {% endif %}
+    {% endblock styles %}
+
+</style>
+
+<script>
+{% block jquery %}
+
+    $(".join-form").submit(function(e){
+        e.preventDefault();
+        console.log($(this).serialize());
+        let joinEmailAPIEndpoint ="{% url 'email-join' %}";
+        $.ajax({
+            method: "POST",
+            data: $(this).serialize(),
+            url: joinEmailAPIEndpoint,
+            success: function(data){
+                $(".join-form").parent().html("<p class='lead'>Success! Thank you for joining.</p>")
+            },
+            error: function(data){
+                $(".join-form-alert").fadeIn();
+                $(".join-form-error").text(data.responseJSON.email[0])
+            }
+        })
+    });
+
+{% endblock jquery %}
+</script>
+
+{% block content %}
+{% load static %}
+    {% if page_obj.show_nav %}
+        {% include "pages/snippets/navbar.html" %}
+    {% endif %}
+    {% if user.is_authenticated %}
+        {% include 'pages/snippets/navbar.html' %}
+    {% endif %}
+    {% if page_obj.layout == 'stacked' %}
+
+        {% include 'pages/snippets/stacked-layout.html' with page_obj=page_obj form=form %}
+        {% else %}
+            {% include 'pages/snippets/standard-layout.html' with page_obj=page_obj form=form %}
+    {% endif %}
+
+    <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+
+
+{% endblock content %}

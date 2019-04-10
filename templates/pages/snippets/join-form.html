@@ -1,0 +1,24 @@
+<form class="join-form" method='POST' action=''>{% csrf_token %}
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="ion-ios-email-outline"></i>
+        </div>
+        <div class="alert alert-danger alert-dismissable join-form-alert" style="display:none"><button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-hidden="true">&times;</span></button> </div>
+        <span class="join-form-error"></span>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {{ form.non_field_errors }}</div>
+        {% endif %}
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {{ field.errors }}</div>
+            {% endif %}
+            <div class="input-group">
+                {{ field }}
+                <span class="input-group-btn">
+                    <input type="submit" value="Join" class="btn btn-default" />
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+</form>
+

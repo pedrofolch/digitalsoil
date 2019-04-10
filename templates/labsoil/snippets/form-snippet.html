@@ -1,0 +1,27 @@
+{% extends 'recipes/base.html' %}
+{% block  content %}
+
+{% if form.errors.non_field_errors %}
+{{ form.errors.non_field_errors }}
+{% endif %}
+
+
+    <section class="main-article" style="padding-top: 0px;">
+        <div class="container">
+            <div class='col-12' style="padding-bottom: 0px;">
+                <div class="alert alert-info">
+                <h1>{{ title }}</h1>
+                    <div class="alert alert-success text-center">
+                        <h2><b>LabSoil from Soil Foodweb Alliance</b></h2>
+                    </div>
+                    <form method='POST' action='' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type='submit' class='btn btn-default' value='Submit'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

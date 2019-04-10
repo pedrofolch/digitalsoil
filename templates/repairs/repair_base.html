@@ -1,0 +1,122 @@
+{% load static %}
+<!--DOCTYPE html -->
+<html>
+<head>
+<title>{% block head_title %}Soil FoodWeb Alliance Blog{% endblock head_title %}</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
+
+
+<link rel='stylesheet' href='{% static "css/base.css" %}' />
+<style>
+{% block style %}{% endblock style %}
+</style>
+
+{% block head_extra %} {% endblock head_extra %}
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+{% include "fuel_station/messages_display.html" %}
+<div class='container'>
+    <ol class='breadcrumb'>
+        <li><a href="{% url 'compost' %}">Soil FoodWeb Alliance</a></li>
+        <li><a href="{% url 'labsoil:list' %}">Microbes in my Soil</a></li>
+        <li><a href='{% url "posts:list" %}'>Posts</a></li>
+        <li><a href="{% url 'brandnames:list' %}">Brand Names</a></li>
+        <li><a href="{% url 'pileofcompost:recipe_list' %}">Piles of Compost</a></li>
+        <li><a href="{% url 'recipes:list' %}">Recipes</a></li>
+        <li><a href="{% url 'home' %}">Digital Soil</a></li>
+
+        {% block fuel_station_detail_link %}
+        {% endblock %}
+
+        {% if not request.user.is_authenticated %}
+        <li class='pull-right'><a href='{% url "register" %}'>Register</a></li>
+        <li class='pull-right'><a href='{% url "login" %}'>Login</a></li>
+        {% else %}
+        <li class='pull-right'><a href='{% url "logout" %}'>Logout</a></li>
+        {% endif %}
+    </ol>
+{% block content %}{% endblock content %}
+</div>
+
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $(".content-markdown").each(function(){
+            let content = $(this).text();
+            let markedContent = marked(content);
+            $(this).html(markedContent)
+    });
+    $(".post-detail-item img").each(function(){
+            $(this).addClass("img-responsive");
+    });
+    
+
+    let contentInput = $("#id_content");
+
+    function setContent(value){
+        let markedContent = marked(value);
+        $("#preview-content").html(markedContent);
+        $("#preview-content img").each(function(){
+            $(this).addClass("img-responsive")
+        })
+    }
+    setContent(contentInput.val());
+
+    contentInput.keyup(function(){
+        let newContent = $(this).val();
+        setContent(newContent)
+    });
+
+    let titleInput = $("#id_title");
+    
+
+
+    function setTitle(value) {
+        $("#preview-title").text(value)
+    }
+    setTitle(titleInput.val());
+
+    titleInput.keyup(function(){
+        let newContent = $(this).val();
+        setTitle(newContent)
+    });
+
+    $(".comment-reply-btn").click(function(event){
+        event.preventDefault();
+        $(this).parent().next(".comment-reply").fadeToggle();
+    })
+
+
+    // preview-title
+    // preview-content
+
+})
+
+</script>
+
+</body>
+</html>

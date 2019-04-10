@@ -1,0 +1,42 @@
+{% extends "basic-dashboard-base.html" %}
+
+{% block head_title %}Field Work | {{ block.super}}{% endblock head_title %}
+
+{% block content %}
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'>
+<h4>Pile of Compost Data <small><a href='{% url "fieldwork:create" %}'>Add Actions</a></small></h4>
+
+<ul>
+{% for obj in object_list %}
+    <li><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}<br/></a>
+        <ul><strong>updated</strong> <small>{{ obj.updated }}</small></ul>
+        {% if obj.contents %}
+        Contents
+        <ul>    
+            {% for item in obj.get_contents %}
+            <li>{{ item }}</li>
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+
+         {% if obj.excludes %}
+        Excludes
+        <ul>    
+            {% for item in obj.get_excludes %}
+            <li>{{ item }}</li>
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+
+
+    </li>
+    {% empty %}
+    <li><a href='{% url "fieldwork:create" %}'>Add Actions</a></li>
+</ul>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

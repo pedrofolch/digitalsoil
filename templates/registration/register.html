@@ -1,0 +1,21 @@
+{% extends "registration/mag-register.html" %}
+
+
+{% block content %}
+
+    <h1>Register</h1>
+
+    <form method='POST' action='{% url 'register' %}'> {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    <hr/>
+
+    <p>Do you need to <a href='{% url "login" %}'>Login</a></p>
+
+{% endblock %}
+
+
+

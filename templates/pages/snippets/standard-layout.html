@@ -1,0 +1,86 @@
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+{% load static %}
+           {% if messages %}
+              <div class="alert alert-warning">
+                  <div class="container">
+                  {% for message in messages %}
+                      {{ message }}<br/>
+                  {% endfor %}
+                  </div>
+              </div>
+            {% endif %}
+      <div class="container marketing center-text">
+        <!-- Three columns of text below the carousel -->
+
+          <div class="row">
+              <div class='col-xs-10 col-sm-10 col-md-10 col-lg-8 mx-auto text-left' style="padding-bottom: 0px;">
+                  <div class="shadow p-3 mb-5 bg-white rounded">
+                      <h5>Newsletter Sign Up</h5>
+                      {% include 'pages/snippets/join-form.html' with form=form %}
+                  </div>
+              </div>
+          </div>
+      </div>
+<br/>
+          <div class="row">
+              <div class="col-6 mx-auto">
+              {% if page_obj.video_embeded %}
+                  <div class="col-sm-6">
+                    {{ page_obj.video_embeded|safe }}
+                  </div>
+              {% endif %}
+          </div>
+
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4 mx-auto">
+                  <img class="rounded-circle" src="{% static "images/soilfoodweb/photos/loveforsoil-1-300x250.jpg" %}" alt="Soil Food Web Alliance logo" width="300" height="300">
+                  <h2>Soil FoodWeb Alliance</h2>
+                  <p>Planing on Growing your own garden, but your soil is no good.  Create your own soil or buy our sources.  With Soil Food Web alliance you can create your own compost, Soil Food Web Alliance can now follow Nina's Recipes and Let her help you out with your compost projects.</p>
+                    <p><a class="btn btn-secondary" href="{% url "compost" %}" role="button">View details &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+              <hr>
+              <div class="col-lg-4 mx-auto">
+                  <img class="rounded-circle" src="{% static "images/grow/images/gardening-hand-harvest-9301.jpg" %}" alt="I Grow NM logo image" width="300" height="300">
+                  <h2>I Grow New Mexico</h2>
+                  <p>Need Help Growing your plants? Let Charlie help you, we provide a place where you and Charlie can monitor your plants and grow them.  Let a Expert help you and guide you.</p>
+                  <p><a class="btn btn-secondary" href="{% url 'igrownm' %}" role="button">View details &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+              <div class="col-lg-4 mx-auto">
+                  <img class="rounded-circle" src="{% static "images/iot/images/fondohome.jpg" %}" alt="folchiot logo" width="300" height="300">
+                  <h2>For OnLine Communications Hosting Internet of Things</h2>
+                  <p><b>(<strong>folch<sup>2</sup>iot</strong>) F</b>or <b>O</b>n<b>L</b>ine <b>C</b>ommunications <b>H</b>osting <b><sup>2</sup></b> <b>I</b>nternet <b>o</b>f <b>T</b>hings.  Finally a place where all your data gathering will make sense.  Internet of Things is finally here. You can gather your data utilizing your own IoT devices or with other IoT providers and integrate it to your projects. </p>
+                  <p><a class="btn btn-secondary" href="{% url "home" %}" role="button">View details &raquo;</a></p>
+              </div><!-- /.col-lg-4 -->
+          </div><!-- /.row -->
+
+
+        <!-- START THE FEATURETTES -->
+
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">{{ page_obj.title }}<span class="text-muted">{{ page_obj.title_description|linebreaks }}</span></h2>
+            <p class="lead">{{ page_obj.content|safe}}</p>
+          </div>
+            <div class="col-md-5 mx-auto" >
+{#               <img class="featurette-image img-fluid mx-auto" src="{% static 'images/grow/images/chalk-chalkboard-chilling-58086.jpg' %}" alt="Generic placeholder image">#}
+                {% if title_btn_url %}
+                    <p><a class="btn btn-primary btn-lg" href="{{ title_btn_url }}" role="button">{{ title_btn }}</a></p>
+                {% endif %}
+            {% if page_obj.video_embeded %}
+                <div class="col-sm-6">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        {{ page_obj.video_embed|safe }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+      </div>
+
+    <hr/>

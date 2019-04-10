@@ -1,0 +1,12 @@
+h1 {
+    color: #e83e8c;
+}
+
+.wmd-panel{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.comment-reply{
+    display:none;
+}

@@ -1,0 +1,12 @@
+<div class="card" style="width: 18rem;">
+    {% if instance.image %}
+  <img class="card-img-top" src="{{ instance.image.url }}" alt="Card image cap">
+    {% endif %}
+  <div class="card-body">
+    <h5 class="card-title text-left">{{ instance.title }}</h5>
+      <p class="card-text text-left">odometer: {{ instance.odometer }}<br/>
+      year: {{ instance.year }}<br/>
+      hp: {{ instance.horsepower }}<br/>
+          engine of: {{ instance.engine_on }}<br/> Needs Repairs: {{ instance.need_repairs }}</p>
+  </div>
+</div>

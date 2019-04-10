@@ -1,0 +1,64 @@
+{% extends 'fieldwork/newblog_base.html' %}
+{% block content %}
+
+        <!-- Bootstrap core CSS pileofcompost list html -->
+<section class="page">
+    <div class="container text-left">
+        <div class='row align-items-start'>
+            <div class='col'>
+                <div class="p-3 mb-5 bg-light shadow rounded"><br/>
+                    <h3>Field Work <small><a href='{% url "fieldwork:create" %}'>Add</a></small></h3><hr />
+                    <ul>
+                         <div class="row">
+                             <div class="col-10">
+                             {% for obj in object_list %}
+                                 <li><a href='{{ obj.get_absolute_url }}'><h4>{{ obj.title }}</h4></a>
+                                     <div class="thumbnail">
+                                         {% if obj.image %}
+                                             <img src="{{ obj.image.url }}" class="float-center img-thumbnail" alt="pile image" width="236" height="306">
+                                         {% endif %}
+                                            <ul><b> Worked by:</b> {{ obj.user }}<br/></ul>
+                                            <ul><b> Last worked on:</b> {{ obj.updated }}<br/></ul>
+                                            <ul><b> Created:</b> {{ obj.created }}<br/></ul>
+                                            <ul><b> Date worked on:</b> {{ obj.updated }}<br/></ul>
+                                            <ul>Turn cycle: <b>{{ obj.turn_cycle }}</b></ul>
+                                            <ul><b> Temperature readings: </b>{{ obj.core_temperature_readings }}</ul>
+                                            <ul>Average Temperature: <b>{{ obj.average_temperature }}</b></ul>
+                                            <ul><b> Humidity readings: </b>{{ obj.core_humidity_readings }}</ul>
+                                            <ul> Average Humidity: <b>{{ obj.average_humidity }}</b></ul>
+                                            <ul> must water now: <b>{{ obj.must_water_now }}</b></ul>
+                                            <ul> must turn now: <b>{{ obj.must_turn_pile }}</b></ul>
+                                            <ul>Is Pile Ready: <b>{{ obj.is_pile_ready }}</b><br/></ul>
+
+
+                                            {% if obj.contents %}
+                                                Contents
+                                                <ul>
+                                                    {% for item in obj.get_contents %}
+                                                        <li>{{ item }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                         {% if obj.excludes %}
+                                             Excludes
+                                             <ul>
+                                                 {% for item in obj.get_excludes %}
+                                                     <li>{{ item }}</li>
+                                                 {% endfor %}
+                                             </ul>
+                                         {% endif %}
+                                     </div>
+                                 </div>
+                                 </div><hr/>
+                             {% empty %}
+                                 <li><a href='{% url "fieldwork:create" %}'>Add Field Work</a></li>
+                             {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+
+{% endblock content %}

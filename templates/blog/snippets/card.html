@@ -1,0 +1,18 @@
+<div class="card" style="width: 18rem;">
+    {% if instance.image %}
+  <img class="card-img-top" src="{{ instance.image.url }}" alt="Card image cap">
+    {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ instance.title }}</h5>
+    <p class="card-text">{{ instance.content|truncatechars:350 }}</p>
+      <p>{{ instance.title }}</p>
+
+      {% if object in user.profile.ebooks.all %}
+          <!-- add a button here to see the product -->
+          You own this
+
+      {% endif %}
+      <hr>
+    <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">view</a>
+  </div>
+</div>

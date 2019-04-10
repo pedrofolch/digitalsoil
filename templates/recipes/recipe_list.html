@@ -1,0 +1,74 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+{% load static %}
+
+        <div class='col-sm-10 col-md-10 col-lg-12 text-left'>
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <h3>Posted Recipes</h3>
+                <p>Welcome to Compost Recipes!.  To Post or Comment you have to be Registered.  <br/><small>To Create a New Post please press <b>"Add"</b>.</small></p>
+                <p>Our purpose is to provide related information on Recipes for Compost issues.  Please feel free to comment
+                    and post it in your facebook account for other to see!</p>
+                <p><strong>Your opinion is very important to us!</strong></p>
+
+                <a href="{% url 'recipes:create' %}"><h2>{{ title }} <small><small>Add</small></small></h2></a>
+
+                <button type="button"
+                    onclick="document.getElementById('demo').innerHTML = Date()">
+                    Click me to display Date and Time.</button>
+
+                    <p id="demo"></p>
+
+                <form method='GET' action='' class='row'>
+                    <div class='col-sm-10'>
+                        <div class='input-group'>
+                            <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
+                            <span class='input-group-btn'>
+                                <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+                                <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            <hr>
+
+               <div class="container-fluid center-block">
+                    <div class="col-6 align-center">
+                        <div class="row center-block">
+                            <div class="shadow p-3 mb-5 bg-white rounded">
+                                {% for object in object_list %}
+                                    <div class="container">
+                                        <div class="col text-center">
+                                            {% include 'recipes/snippets/card.html' with instance=object %}<br/>
+                                         </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if object_list.has_previous %}
+                        <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}
+                                   {% if request.GET.q %}
+                                       &q={{ request.GET.q }}
+                                   {% endif %}">
+                            previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                    </span>
+                    {% if object_list.has_next %}
+                        <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}
+                                       &q={{ request.GET.q }}
+                                   {% endif %}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+
+        </div>
+    <hr/>
+
+{% endblock content %}

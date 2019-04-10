@@ -1,0 +1,79 @@
+{% extends 'blog/newblog_base.html' %}
+{% block content %}
+{% load static %}
+		<section class="page">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+	          <ol class="breadcrumb">
+	          	<li><a href="{% url 'iotsensor:list' %}">Instructions</a></li> /
+	            <li class="active">What we do</li>
+	          </ol>
+						<h1 class="page-title"><small>folch<sup>2</sup>iot</small></h1>
+                        <p class="page-subtitle"><b><i>for on line communications hosting to the internet of things</i></b></p>
+						<div class="line thin"></div>
+						<div class="page-description">
+							<h4>Welcome!</h4>
+							<p> As the name implies, we communicate from device to device and host the information, an example,
+                                we are digitizing soil and everything that goes with it.  Our goal is to
+                                utilize the data gathered by devices with sensors and apply them to your real live work flow,
+                                in a way that instead of working for the system let the system work for you.</p>
+
+                            <p> We all know that watering plants and gathering data now can be done with simple devices
+                                called (IoT) Internet of Things.  Yet I have not seen one that works for you, I mean,
+                                yes you can see the data, turn on and off, but a system that can be triggered and implement AI on
+                                such triggers that I have not seen.  The idea is to represent reality with today's technology
+                                with today's field data gathering and workforce management. By creating sensors and preferences that work for you.</p>
+
+                            <p> We start with an Open source platform dedicated to field of agriculture. Providing a consule
+                                to create and monitor good compost soil, Growing, and maintenance of your plants,  and
+                                farm equipment.  Our goal is to provide a web base application where all your data can be utilized in your favor.
+                                Let the machine do your automated tasks and provide you with useful data that will be implemented
+                                through all API connections with other Internet of Things Providers and Services.  This will be
+                                your home base preference manager for all your Internet of Things and Field Work managing web site.</p>
+							<p> With the help of Soil FoodWeb Alliance we are know able to provide a source where a professional may view and
+                                post opinions and recommendations on your compost pile and turning cycles.</p>
+                            <p> With the implementation of the Internet of Things, field work and field sensors can integrate
+                                as a service, providing a place where the data gathered will work for you.  Resources for decision
+                                making and automatization of desired events.</p>
+                            <p> Sensors can be implemented no matter your service provider, as long as they have API services.</p>
+
+							<h4>for on line communications hosting 2...</h4>
+							<p> Certainly you have heard of Internet of Things, as a big topic and that it is the future.
+                                What is Internet of Things and wy should I use it.  First lets get to basics, the meaning of
+                                Internet of Things is that the device can send data and receive data, like us for example.
+                                We can send data by voice, and receive data by voice.  Well this devices can do the same,
+                                but they do it through the Internet.  Meaning that your device can talk to you or your smart phone,
+                                as long as you both are connected to the Internet, from anywhere.</p>
+                            <p>
+                                More than that, you can automate the system to report or send SMS or email to the desired person
+                                or person in charge of that specific event.  By communicating the event to the desired person,
+                                results can be achieved.</p>
+
+							<h4>Sensor and Devices</h4>
+							<p> We are working on an example where the device will provide data, in this instance temperature
+                                and humidity from a pile of compost.  Digital Soil, our web based system, will store that data
+                                and provide the information in various manners in order to process and view the information with
+                                graphics and specs.</p>
+
+                            <h4>For On Line Communications Hosting 2 Internet of Things (folch<sup>2</sup>iot)</h4>
+							<p> Lets get everything connected.  Automating procedures, readings and triggerings for data gathering and
+                                field work metrics.  Let us connect your IoT devices and services with your actual work flow and connect your data
+                                to your source.  Providing realtime or time scheduled readings from your pile of compost, plants or other.
+                                And that's only the beggining, later we will implement AI on videos for security, gps tracking on objects, etc.
+
+							</p>
+							<div class="question">
+								Have a question? <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+{% endblock content %}
+
+
+{% include "blog/blog_footer.html" %}
+

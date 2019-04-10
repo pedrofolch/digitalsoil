@@ -1,0 +1,24 @@
+<div class='container'>
+    <ol class='breadcrumb'>
+        <li><a href="{% url 'assets:list' %}">Garage</a></li>
+        <li><a href="{% url 'repairs:list' %}">Repairs & Invoices</a></li>
+        <li><a href='{% url "posts:list" %}'>Blog/Posts</a></li>
+        <li><a href="{% url 'fuel_station:list' %}">Fuel Station</a></li>
+        <li><a href="{% url 'providers:list-of-supplier' %}">Service Providers</a></li>
+        <li><a href="{% url 'products:product_list' %}">Merchandise & Consumables</a></li>
+        <li><a href="{% url 'iotsensor:list' %}">Internet of Thing Sensor</a></li>
+
+        {% block post_detail_link %}
+        {% endblock %}
+
+        {% if not request.user.is_authenticated %}
+        <li class='pull-right'><a href='{% url "register" %}'>Register</a></li>
+        <li class='pull-right'><a href='{% url "login" %}'>Login</a></li>
+        {% else %}
+        <li class='pull-right'><a href='{% url "logout" %}'>Logout</a></li>
+        {% endif %}
+    </ol>
+    <div class='container'>
+        {% block content %}{% endblock content %}
+    </div>
+</div>

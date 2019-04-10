@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | <small>folch<sup>2</sup>iot</small>{% endblock %}
+
+{% block extrastyle %}
+<style>
+    #header {
+        background-color: #4d5dad;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}"><small>folch<sup>2</sup>iot</small></a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

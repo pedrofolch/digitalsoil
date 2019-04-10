@@ -1,0 +1,87 @@
+{% url 'recipes:recipe_list' as recipe_list_url %}
+{% url 'iotsensor:list' as iotsensor_list_url %}
+{% url 'recipes:create' as recipe_create_url %}
+{% url 'fieldwork:list' as fieldwork_list_url %}
+{% url 'fieldwork:update' as fieldwork_create_url %}
+{% url 'fieldwork:average' as fieldwork_average_url %}
+{% url 'labsoil:list' as labsoil_list_url %}
+{% url 'register' as register_url %}
+{% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
+
+{% url 'assets:list' as asset_list_url %}
+{% url 'assets:create' as typeofasset_create_url %}
+{% url 'assets:asset_create' as create_asset_url %}
+{% url 'engine_room:create' as engine_create_url %}
+{% url 'engine_room:list' as engine_room_list_url %}
+{% url 'fuel_station:list' as fuel_station_list_url %}
+{% url 'fuel_station:create' as add_fuel_url %}
+{% url 'repairs:list' as repair_list_url %}
+{% url 'repairs:create' as repair_create_url %}
+{% url 'providers:list-of-supplier' as list_of_supplier_url %}
+{% url 'products:product_list' as product_list_url %}
+{% url 'purchase:list' as purchase_list_url %}
+{% url 'purchase:create' as purchase_create_url %}
+{% url 'posts:list' as posts_url %}
+{% url 'posts:create' as post_create_url %}
+{% url 'assets:parts_create' as part_create_url %}
+{% url 'assets:marine_manufacturer_create' as marine_manufacturer_url %}
+{% url 'assets:marine_model_create' as marine_model_url %}
+{% url 'assets:marine_create' as marine_vessel_create_url %}
+{% url 'assets:land_manufacturer_create' as land_manufacturer_url %}
+{% url 'assets:land_model_create' as land_model_url %}
+{% url 'assets:equipment_manufacturer_create' as equipment_manufacturer_url %}
+{% url 'assets:equipment_model_create' as equipment_model_create_url %}
+
+
+
+   <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="background-color: #e3f2fd;" >
+       <a class="navbar-brand" href="{{ iotsensor_list_url }}">folch<sup><small>2</small></sup>iot</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ posts_url }}">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ recipe_list_url }}">Digital Soil</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Asset Manager</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                    {% if request.user.is_authenticated %}
+                        <a class="dropdown-item {% if request.path == asset_list_url %}active{% endif %}" href="{{ asset_list_url }}">Assets</a>
+                        <a class="dropdown-item {% if request.path == create_asset_url %}active{% endif %}" href="{{ create_asset_url }}">Add New Asset</a>
+                        <a class="dropdown-item {% if request.path == typeofasset_create_url %}active{% endif %}" href="{{ typeofasset_create_url }}">Type of Asset</a>
+                        <a class="dropdown-item {% if request.path == part_create_url %}active{% endif %}" href="{{ part_create_url }}">Add Parts</a>
+
+                        <a class="dropdown-item {% if request.path == engine_create_url %}active{% endif %}" href="{{ engine_create_url }}">Add New Engine</a>
+
+                        <a class="dropdown-item {% if request.path == repair_list_url %}active{% endif %}" href="{{ repair_list_url }}">Repair History</a>
+                        <a class="dropdown-item {% if request.path == repair_create_url %}active{% endif %}" href="{{ repair_create_url }}">Repair Order</a>
+                        <a class="dropdown-item {% if request.path == fuel_station_list_url %}active{% endif %}" href="{{ fuel_station_list_url }}">Fuel Station</a>
+                        <a class="dropdown-item {% if request.path == add_fuel_url %}active{% endif %}" href="{{ add_fuel_url }}">Add Fuel</a>
+                        <a class="dropdown-item {% if request.path == marine_manufacturer_url %}active{% endif %}" href="{{ marine_manufacturer_url }}">Marine Manufacturer</a>
+                        <a class="dropdown-item {% if request.path == marine_model_url %}active{% endif %}" href="{{ marine_model_url }}">Marine Model</a>
+                        <a class="dropdown-item {% if request.path == marine_vessel_create_url %}active{% endif %}" href="{{ marine_vessel_create_url }}">Marine Vessel</a>
+                        <a class="dropdown-item {% if request.path == land_manufacturer_url %}active{% endif %}" href="{{ land_manufacturer_url }}">Vehicle Manufacturer</a>
+                        <a class="dropdown-item {% if request.path == land_model_url %}active{% endif %}" href="{{ land_model_url }}">Vehicle Model</a>
+                    {% else  %}
+                        <a class="dropdown-item {% if request.path == register_url %}active{% endif %}" href="{{ register_url }}">Register</a>
+                        <a class="dropdown-item {% if request.path == login_url %}active{% endif %}" href="{{ login_url }}">Login</a>
+                    {% endif %}
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == iotsensor_list_url %}active{% endif %}" href="{{ iotsensor_list_url }}">Internet of Things</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == logout_url %}active{% endif %}" href="{{ logout_url }}">Logout</a>
+            </li>
+        </ul>
+      </div>
+   </nav><br/>

@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div class="jumbotron">
+        <small><strong>{{ user.username }}</strong></small><br/>
+		<h1>Welcome to your dashboard</h1>
+
+		{% if hide_me == True %}
+		<p>Your next scrape is in {{ next_scrape }} hours.</p>
+		{% else %}
+
+		<form method="POST" action="{% url 'scrape' %}">
+			{% csrf_token %}
+			<button type="submit" class="btn btn-primary">Get my morning news</button>
+		</form>
+		{% endif %}
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2 text-center">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <h3>Suppliers List</h3>
+                {% for brand in supplier_list %}
+                    <div class="card text-center" style="width: 100%;">
+                        {% if brand.image %}
+                            <img class="card-img-top" src="{{ brand.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ brand.title }}</h5>
+                            {%  if brand.merchant_category %}
+                                {{ brand.content }}<br/>
+{#                                <a href="{% url 'products:product_list' %}">Product list</a>#}
+                            <p></p>
+                            {% endif %}
+                            {% if brand.url %}
+                                <a href="{{ brand.url }}">Website Link</a>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <a href="{% url 'providers:create' %}"><h5>Business Name<small> add</small></h5></a>
+{#                            <a href="{% url 'pileofcompost:list-all' %}"><h5>Pile of Compost<small> list</small></h5></a>#}
+{#                            <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">Comment</a></p>#}
+                            <span><a href="{{ supplier.get_delete_url }}"><i class="fas fa-trash-alt"> Delete</i></a></span>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+                <a href="{% url 'providers:create' %}"><h5>Service Providers<small> Add</small></h5></a>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="col-sm-8 text-center">
+                <h3>Soil FoodWeb Alliance Posts</h3>
+                {% for post in post_list %}
+                    <div class="card text-center" style="width: 100%;">
+                        {% if post.image %}
+                            <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            {% if post.url %}
+                                <a href="{{ post.url }}">Link</a>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <a href="{% url 'posts:list' %}"><h5>Soil FoodWeb Alliance Posts <small>list</small></h5></a>
+{#                            <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">Comment</a></p>#}
+{#                            <span><a href="{{ post.get_delete_url }}"><i class="fas fa-trash-alt"> Delete</i></a></span>#}
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+                <a href="{% url 'posts:create' %}"><h5>Soil FoodWeb Alliance Posts <small>Add</small></h5></a>
+                <hr>
+			</div>
+
+            <div class="col-sm-2 text-center">
+                <h3>Compost</h3>
+                    {% for pile in pile_list %}
+                    <div class="card text-center" style="width: 100%;">
+                        {% if pile.image %}
+                            <img class="card-img-top" src="{{ pile.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                                <h5 class="card-title">{{ pile.producer }}: {{ pile.pile_name }}</h5>
+                                <p>last update: {{ pile.update }}</p>
+                                {% if pile.url %}
+                                    <a href="{{ pile.url }}">WebSite Link</a>
+                                {% endif %}
+
+                        </div>
+                        <div>
+                            <a href="{% url 'recipes:list-all' %}"><h5>Recipes of Compost<small> list</small></h5></a>
+                        </div>
+                    </div>
+                    <hr>
+				    {% endfor %}
+                <span><a href='{% url "recipes:create" %}'>Compost Recipe <small>add</small></a></span>
+            <hr>
+                <a href="{% url 'fieldwork:create' %}"><h5>Fieldwork<small> New Field Data</small></h5></a>
+            <hr>
+                <a href="{% url 'fieldwork:fieldwork_list' %}"><h5>Field Work list</h5></a>
+{#                <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">Comment</a></p>#}
+{#                <span><a href="{{ fieldwork.get_delete_url }}"><i class="fas fa-trash-alt"> Delete</i></a></span>#}
+                <hr>
+            </div>
+        </div>
+
+    <br/>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2 text-center">
+                <h3>Assets</h3>
+                {% for asset in asset_list %}
+				<div class="card text-center" style="width: 100%;">
+                    {% if asset.image %}
+                        <img class="card-img-top" src="{{ asset.image.url }}" alt="Card image cap">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ asset.title }}</h5>
+                        {% if asset.url %}
+                            <a href="{{ asset.url }}">Link</a>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'assets:list' %}"><h5>Assets <small>list</small></h5></a>
+                </div>
+				<hr>
+				{% endfor %}
+                <span><a href='{% url "assets:create" %}'>Add Asset</a></span>
+                   <hr>
+            </div>
+
+{#            <div class="col-sm-8 text-center">#}
+{#                <div class="shadow p-3 mb-5 bg-white rounded">#}
+{#                    <h3>News</h3>#}
+{#                    {% for object in object_list %}#}
+{#                        <div class="card text-center" style="width: 100%;">#}
+{#                            <div class="card-body">#}
+{#                                <img class="card-img-top" src="{{ object.image.url }}">#}
+{#                                <h5 class="card-title"><a href="{{ object.url }}">{{ object.title }}</a></h5>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+
+            <div class="col-sm-2 text-center">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <h3>Notepad</h3>
+                    {% for note in notes_list %}
+                        <div class="card text-center" style="width: 100%;">
+                            {% if note.image %}
+                                <img class="card-img-top" src="{{ note.image.url }}" alt="Card image cap">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ note.title }}</h5>
+                                {% if note.url %}
+                                    <a href="{{ note.url }}">Link</a>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span><a href="{{ note.get_update_url }}"><i class="fas fa-pen-alt"> Edit</i></a></span>
+                                <span><a href="{{ note.get_delete_url }}"><i class="fas fa-trash-alt"> Delete</i></a></span>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                        <a id="dropdown-toggle" data-toggle="collapse" href="#createnote" role="button" aria-expanded="false" aria-controls="collapseExample">Add Note</a>
+                        <hr>
+                        <div class="collapse" id="createnote">
+                            <form method="POST" action="." enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input class="btn btn-warning" type="submit" name="createnote">
+                            </form>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+	<script
+	src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

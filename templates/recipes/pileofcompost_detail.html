@@ -1,0 +1,36 @@
+{% extends 'pileofcompost/pileofcompost_base.html' %}
+
+{% block head_title %}Piles Items | {{ block.super}}{% endblock head_title %}
+<!-- Bootstrap core CSS pileofcompost detail html -->
+{% block content %}
+        <div class='row'>
+            <div class='col-sm-6'>
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <h3>{{ object.name }}</h3>
+                        <p>Location: {{ object.title.name }}</p>
+                    {% if object.contents %}
+                    Contents
+                    <ul>
+                        {% for item in object.get_contents %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+
+                    </ul>
+                    {% endif %}
+
+                    {% if object.excludes %}
+                    Excludes
+                    <ul>
+                        {% for item in object.get_excludes %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+{% endif %}
+
+{% endblock %}
+
+{% include 'pages/snippets/home_footer.html' %}

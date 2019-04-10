@@ -1,0 +1,26 @@
+{% load static %}
+   <main role="main">
+          <div class="row">
+                  {% if form.errors.non_field_errors %}
+                      {{ form.errors.non_field_errors }}
+                  {% endif %}
+          </div><br/>
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">{{ page_obj.title }}</h1>
+          <p>{{ page_obj.title_description|linebreaks }}</p>
+            {% if title_btn_url %}
+
+          <p><a class="btn btn-primary btn-lg" href="{{ title_btn_url }}" role="button">{{ title_btn }}</a></p>
+            {% endif %}
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+          {{ page_obj.content|safe }}
+
+      </div> <!-- /container -->
+
+    </main>

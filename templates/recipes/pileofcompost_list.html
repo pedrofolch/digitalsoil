@@ -1,0 +1,71 @@
+{% extends 'pileofcompost/pileofcompost_base.html' %}
+{% block content %}
+        <!-- Bootstrap core CSS pileofcompost list html -->
+<div class="container">
+    <div class="row">
+        <div class='col-sm-12 col-md-11 col-lg-10 text-left'>
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <h3>Your Personal List of Piles</h3>
+                <p>The purpose of this page is to provide you with a list of Piles and its data.  You may edit, view or Add
+                piles to this list by pressing "Add" or view its details and edit them if needed by pressing it's name.</p>
+                <p>You must have a Signature Brand Created first to be able to create a Pile of Compost.  Click here to
+                create a Signature Name</p>
+                <li><a href="{% url 'brandnames:create' %}">Create Signature Name</a></li>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="page">
+    <div class="container-fluid text-left">
+        <div class='row align-items-start'>
+            <div class='col'>
+                <div class="shadow p-3 mb-5 bg-light rounded">
+                    <h4>Pile of Compost <small><a href='{% url "pileofcompost:create" %}'>Add</a></small></h4>
+                    <ul>
+                        {% if not request.user.is_authenticated %}
+                            {% for obj in object_list %}
+                                <li><a href='{{ obj.get_absolute_url }}'><h4>{{ obj.title }}</h4></a>
+                                    <ul><b>Recipe Name:</b> {{ obj.recipe_name }}<br/></ul>
+                                    <ul><b>Observation:</b> {{ obj.observation }}<br/></ul>
+                                    <ul><b>Worked by:</b> {{ obj.user }}<br/></ul>
+                                    <ul><b>Date worked on:</b> {{ obj.update }}<br/></ul>
+                                    <ul><b>Pile specs:</b><br/></ul>
+                                    <ul>Wide: {{ obj.wide }}<br/></ul>
+                                    <ul>length: {{ obj.length }}<br></ul>
+                                    <ul>Height: {{ obj.tall }}</ul>
+                                    {% if obj.contents %}
+                                        Contents
+                                        <ul>
+                                            {% for item in obj.get_contents %}
+                                                <li>{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    {% if obj.excludes %}
+                                        Excludes
+                                        <ul>
+                                            {% for item in obj.get_excludes %}
+                                                <li>{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% empty %}
+                            <li><a href='{% url "pileofcompost:create" %}'>Add Pile of Compost</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+{% endblock content %}
+
+
+
+
+
+
+

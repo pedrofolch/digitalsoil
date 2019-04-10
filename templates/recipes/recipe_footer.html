@@ -1,0 +1,66 @@
+    <footer class="container text-center">
+        <p><small>&copy; folch<sup>2</sup>iot 2017-2018</small></p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script><script type="text/javascript">
+
+    $(document).ready(function(){
+        $(".content-markdown").each(function(){
+                var content = $(this).text();
+                var markedContent = marked(content);
+                $(this).html(markedContent)
+        });
+        $(".post-detail-item img").each(function(){
+                $(this).addClass("img-responsive");
+        });
+
+
+        var contentInput = $("#id_content");
+
+        function setContent(value){
+            var markedContent = marked(value);
+            $("#preview-content").html(markedContent);
+            $("#preview-content img").each(function(){
+                $(this).addClass("img-responsive")
+            })
+        }
+        setContent(contentInput.val());
+
+        contentInput.keyup(function(){
+            var newContent = $(this).val();
+            setContent(newContent)
+        });
+
+        var titleInput = $("#id_title");
+
+
+        function setTitle(value) {
+            $("#preview-title").text(value)
+        }
+        setTitle(titleInput.val());
+
+        titleInput.keyup(function(){
+            var newContent = $(this).val();
+            setTitle(newContent)
+        });
+
+        $(".comment-reply-btn").click(function(event){
+            event.preventDefault();
+            $(this).parent().next(".comment-reply").fadeToggle();
+        })
+
+
+        // preview-title
+        // preview-content
+
+    })
+
+    </script>
+
+  </body>
+</html>

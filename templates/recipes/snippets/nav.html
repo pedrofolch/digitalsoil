@@ -1,0 +1,71 @@
+{% url 'folch2iot' as folch2iot_url %}
+{% url 'recipes:recipe_list' as recipe_list_url %}
+{% url 'iotsensor:list' as iotsensor_list_url %}
+{% url 'recipes:create' as recipe_create_url %}
+{% url 'fieldwork:fieldwork_list' as fieldwork_list_url %}
+{% url 'fieldwork:create' as fieldwork_create_url %}
+{% url 'labsoil:list' as labsoil_list_url %}
+{% url 'register' as register_url %}
+{% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
+
+{% url 'assets:list' as asset_list_url %}
+{% url 'engine_room:list' as engine_room_list_url %}
+{% url 'fuel_station:list' as fuel_station_list_url %}
+{% url 'repairs:list' as repair_list_url %}
+{% url 'providers:list-of-supplier' as list_of_supplier_url %}
+{% url 'products:product_list' as product_list_url %}
+{% url 'purchase:list' as purchase_list_url %}
+{% url 'purchase:create' as purchase_create_url %}
+{% url 'posts:list' as posts_url %}
+{% url 'posts:create' as post_create_url %}
+{% url 'labsoil:create' as labsoil_create_url %}
+
+
+
+   <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="background-color: #e3f2fd;" >
+       <a class="navbar-brand {% if request.path == folch2iot_url %}active{% endif %}" href="{{ folch2iot_url }}">folch<sup><small>2</small></sup>iot</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link{% if request.path == posts_url %}active{% endif %}" href="{{ posts_url }}">Posts</a>
+
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Digital Soil</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    {% if request.user.is_authenticated %}
+                        <a class="dropdown-item {% if request.path == recipe_list_url %}active{% endif %}" href="{{ recipe_list_url }}">Recipes</a>
+                        <a class="dropdown-item {% if request.path == recipe_create_url %}active{% endif %}" href="{{ recipe_create_url }}">Create New Recipe</a>
+                        <a class="dropdown-item {% if request.path == fieldwork_list_url %}active{% endif %}" href="{{ fieldwork_list_url }}">View Field Work</a>
+                        <a class="dropdown-item {% if request.path == fieldwork_create_url %}active{% endif %}" href="{{ fieldwork_create_url }}">Create Field Work Data</a>
+                        <a class="dropdown-item {% if reques.path == labsoil_list_url %}active{% endif %}" href="{{ labsoil_list_url }}">view Lab Data</a>
+                        <a class="dropdown-item {% if reques.path == labsoil_create_url %}active{% endif %}" href="{{ labsoil_create_url }}">create New Lab Data</a>
+
+                    {% else  %}
+                        <a class="dropdown-item {% if request.path == register_url %}active{% endif %}" href="{{ register_url }}">Register</a>
+                        <a class="dropdown-item {% if request.path == login_url %}active{% endif %}" href="{{ login_url }}">Login</a>
+                    {% endif %}
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == asset_list_url %}active{% endif %}" href="{{ asset_list_url }}">Assets Manager</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == iotsensor_list_url %}active{% endif %}" href="{{ iotsensor_list_url }}">Internet of Things</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == logout_url %}active{% endif %}" href="{{ logout_url }}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.microbesinmysoil.com">Microbes in my Soil</a>
+            </li>
+        </ul>
+      </div>
+   </nav><br/>

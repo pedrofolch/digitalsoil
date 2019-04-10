@@ -1,0 +1,59 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+<!-- Bootstrap core CSS pileofcompost detail update html -->
+    <section class="main-article" style="padding-top: 0px;">
+        <div class="container">
+            <div class='col-12' style="padding-bottom: 0px;">
+                <div class="alert alert-info">
+                <h1>{{ title }}</h1>
+                    <form method='POST' action='' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type='submit' class='btn btn-default' value='Submit'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{#    <section class="page">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-sm-10 col-md-10 col-lg-8 text-left">#}
+{#                    <div class="shadow p-3 mb-5 bg-white rounded">#}
+{#                        <ul>#}
+{#                            <h2>{{ form.instance.title }} form</h2>#}
+{#                            <p>Brand Name: {{ form.instance.producer }}</p>#}
+{#                            {% if form.instance.contents %}#}
+{#                            Content#}
+{#                            <ul>#}
+{#                                {% for item in form.instance.get_contents %}#}
+{#                                    <li>{{ item }}</li>#}
+{#                                {% endfor %}#}
+{##}
+{#                            </ul>#}
+{#                            {% endif %}#}
+{#                            {% if form.instance.excludes %}#}
+{#                            Excludes#}
+{#                            <ul>#}
+{#                                {% for item in form.instance.get_excludes %}#}
+{#                                <li>{{ item }}</li>#}
+{#                                {% endfor %}#}
+{#                            <hr/>#}
+{#                            <h3>Make changes</h3>#}
+{#                            </ul>#}
+{#                            {% endif %}#}
+{#                            <h1>Recipe Data</h1>#}
+{#                            <form method='POST' action='' enctype='multipart/form-data'>#}
+{#                                {% csrf_token %}#}
+{#                                {{ form.as_p }}#}
+{#                                <input type='submit' class='btn btn-default' value='Create Recipe' />#}
+{#                            </form>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+
+{% endblock content %}

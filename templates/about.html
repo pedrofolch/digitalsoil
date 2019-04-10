@@ -1,0 +1,72 @@
+{% extends 'blog/newblog_base.html' %}
+{% block content %}
+{% load static %}
+		<section class="page">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+	          <ol class="breadcrumb">
+	          	<li><a href="{% url 'home' %}">Home   </a></li>  /
+	            <li class="active">  About Us</li>
+	          </ol>
+						<h1 class="page-title">About Us</h1>
+						<p class="page-subtitle">Digital Soil - folch2iot</p>
+						<div class="line thin"></div>
+						<div class="page-description">
+							<h4>Digital Soil</h4>
+							<p> Welcome to Digital Soil!  As the name implies, we are digitizing soil and everything that goes with it.
+                                We all know that watering plants and gathering data now can be done with simple devices
+                                called (IoT) Internet of Things.  The idea is to represent reality with today's technology
+                                with today's field data gathering and workforce management.  </p>
+
+                            <p> Open source platform dedicated to field of agriculture.  We are focused on representing
+                                real live data and process from Compost, Growing, and maintenance of your plants, equipment and
+                                farm.  Our goal is to provide a web base application where all your data can be utilized in your favor.
+                                Let the machine do your automated tasks and provide you with useful data that will be implemented
+                                through all API connections with other Internet of Things Providers and Services.  This will be
+                                your home base preference manager for all your Internet of Things and Field Work managing web site.
+							</p>
+							<p>
+								With the help of Soil FoodWeb Alliance we are know able to provide a source where a professional may view and
+                                post opinions and recommendations on your compost pile and turning cycles.
+							</p>
+                            <p>Our goal is to provide a web service implementing Internet of Things, so field work and field sensors
+                            can integrate into our service, providing a place where the data gathered will work for you.  Providing
+                            resorces for desition making and automatization of desired events.</p>
+                            <p>Sensors can be implemented no matter your service provider, as long as they have API services.
+                            </p>
+							<h4>Soil FoodWeb Alliance</h4>
+							<p>
+								Soil contains one of the most diverse habitats on earth. A single teaspoon of soil may contain
+                                millions of individual organisms and tens of thousands of species of microbes: bacteria,
+                                fungi, protozoa, nematodes, arthropods … on up to earthworms, ants, spiders, and voles.</p>
+                            <p>
+                                The more biodiversity contained within the soil, the healthier and more resilient the plants
+                                (and the animals that eat the plants) will be. Unfortunately, modern agricultural practices
+                                have abused our soil to the point where it can no longer support or sustain a healthy
+                                and diverse array of soil “critters”. Compost can return the nutrients absent in a lifeless
+                                soil, and support the organisms which will continue to build the soil for years to come.
+                            </p>
+
+							<h4>I Grow NM</h4>
+							<p>
+								Let the expert on growing help you out on tips and techniques that can enhance your grow life experience.
+							</p>
+                            <h4>For OnLine Communications Hosting 2 Internet of Things (folch2iot)</h4>
+							<p> Lets get everything connected.  Automating procedures, readings and triggerings for data gathering and
+                                field work metrics.  Let us connect your IoT devices and services with your actual work flow and connect your data
+                                to your source.  Providing realtime or time scheduled readings from your pile of compost, plants or other.
+
+							</p>
+							<div class="question">
+								Have a question? <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+{% endblock content %}
+
+{% include 'folch2iot/magazine_footer.html' %}
