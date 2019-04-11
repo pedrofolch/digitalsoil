@@ -117,7 +117,7 @@ INSTALLED_APPS = [
 ]
 
 GRAPHENE = {
-    'SCHEMA': 'earth.schema.schema'
+    'SCHEMA': 'digitalsoil.schema.schema'
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -227,8 +227,8 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
-LOGOUT_REDIRECT_URL = 'folch2iot/'
-LOGIN_REDIRECT_URL = 'login/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 
 # Stripe and Braintree Settings

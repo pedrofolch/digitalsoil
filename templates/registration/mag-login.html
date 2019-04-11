@@ -12,7 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="description" content="folch2iot is a HTML5 & CSS3 magazine dedicated to internet of things and field work.">
 		<meta name="author" content="Pedro Folch">
-		<meta name="keyword" content="folch2iot, html5, css3, template, magazine template">
+		<meta name="keyword" content="folch2iot, html5, css3, template, magazine template, soil food web">
 		<title><small>&copy; folch<sup>2</sup>iot 2017-2018</small></title>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="{% static "scripts/bootstrap/bootstrap.min.css" %}">
@@ -49,23 +49,22 @@
 							<ul class="nav-icons">
 								<a href="{{ register_url }}"><i class="ion-person-add"></i> Register  </a> <a href="{{ login_url }}"><i class="ion-person"></i> Login</a></li>
 							</ul>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			<!-- Start nav -->
 
 			<!-- End nav -->
 		</header>
 
-		<section class="login first grey">
+		<section class="login first grey padding-top: 100px;">
 			<div class="container">
 				<div class="box-wrapper">				
 					<div class="box box-border">
 						<div class="box-body">
-                            <div class="constainer">
+                            <div class="container">
 							    {% block content %}
 
                                 {% endblock content %}

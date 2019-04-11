@@ -23,6 +23,7 @@ DEFAULT_FILE_STORAGE = 'digitalSoil.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'digitalSoil.aws.utils.StaticRootS3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'projectdigitalsoil'
 S3DIRECT_REGION = 'us-west-1'
+AWS_DEFAULT_ACL = None
 AWS_S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 
 MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME

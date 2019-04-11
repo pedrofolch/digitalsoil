@@ -36,8 +36,9 @@
 <body>
 
 {% include 'messages.html' %}
+{% include 'recipes/snippets/nav.html' %}
 
-<div class="container">
+<div class="container padding-top: 100px;">
     {% block content %}{% endblock content %}
 </div>
 
@@ -51,10 +52,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-
-{% include 'recipes/snippets/nav.html' %}
-
-{% block content %}{% endblock content %}
 
 {#{% include 'pages/snippets/home_footer.html' %}#}
         <!-- /.container -->

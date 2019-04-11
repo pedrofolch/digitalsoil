@@ -2,6 +2,7 @@
   position: fixed;
   bottom: 20px;
   left: 20px;
+  padding-top: 100px;
   z-index: 2002;
 }
 .demo-settings .demo-settings-toggle {
@@ -48,7 +49,7 @@
   opacity: 0;
 }
 .demo-settings .demo-settings-options ul {
-  padding: 0;
+  padding-top: 100px;
   margin: 0;
   margin-left: 60px;
   width: 100%;

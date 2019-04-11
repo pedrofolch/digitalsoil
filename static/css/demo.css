@@ -1,5 +1,6 @@
 .demo-settings {
   position: fixed;
+  padding-top: 100px;
   bottom: 20px;
   left: 20px;
   z-index: 2002;
