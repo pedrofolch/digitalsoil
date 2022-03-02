@@ -85,7 +85,7 @@ requests==2.21.0
 requests-oauthlib==1.2.0
 Rx==1.6.1
 s3transfer==0.2.0
-Scrapy==1.6.0
+Scrapy==1.8.2
 service-identity==18.1.0
 singledispatch==3.4.0.3
 six==1.12.0
